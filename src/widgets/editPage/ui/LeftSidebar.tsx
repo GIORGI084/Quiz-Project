@@ -15,7 +15,6 @@ const LeftSidebar = () => {
       type: "heading",
       title: "Heading",
       description: "Section title or heading",
-      icon: "📝",
       color: "bg-blue-500",
     },
   ];
