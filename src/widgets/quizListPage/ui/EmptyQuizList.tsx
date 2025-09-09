@@ -1,0 +1,33 @@
+import React from "react";
+import { Button } from "@/shared/ui/Button";
+
+const EmptyQuizList = () => {
+  return (
+    <div className="text-center py-16 flex justify-center items-center flex-col">
+      <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+        <svg
+          className="w-8 h-8 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+          />
+        </svg>
+      </div>
+      <p className="text-lg font-medium text-gray-900 mb-2">No quizzes yet</p>
+      <p className="text-gray-500 mb-6">
+        Get started by creating your first quiz
+      </p>
+      <Button href="/quiz/edit" type="primary" className="max-w-xs">
+        Create Your First Quiz
+      </Button>
+    </div>
+  );
+};
+
+export { EmptyQuizList };

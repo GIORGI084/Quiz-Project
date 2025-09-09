@@ -2,7 +2,7 @@
 
 import type { ReactElement } from "react";
 
-import { ViewQuizPage } from "@/widgets/ViewQuizPage/VeiwQuizPage";
+import { ViewQuizPage } from "@/widgets/viewQuizPage/VeiwQuizPage";
 
 const Page = (): ReactElement => <ViewQuizPage />;
 

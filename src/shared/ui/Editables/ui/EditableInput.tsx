@@ -1,5 +1,5 @@
 import React from "react";
-import { useEditable } from "@/shared/ui/Editables/model/useEditable";
+import { useEditable } from "@/shared/ui/editables/model/useEditable";
 import { EditActionButtons } from "./EditActionButtons";
 import { Option, QuestionInputTypes } from "@/shared/model/quiz";
 

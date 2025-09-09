@@ -2,13 +2,15 @@ import { useParams } from "next/navigation";
 import React from "react";
 import { useQuizViewer } from "@/entities/quiz/model/useQuizViewer";
 import { Header } from "@/shared/ui/Header";
-import { QuizHeader } from "@/widgets/ViewQuizPage/ui/QuizHeader ";
+import { QuizHeader } from "@/widgets/viewQuizPage/ui/QuizHeader ";
 import { QUIZ_MESSAGES } from "@/shared/constants/messages";
-import { NavigationButtons } from "@/widgets/ViewQuizPage/ui/NavigationButtons";
-import { ProgressBar } from "@/widgets/ViewQuizPage/ui/ProgressBar";
+import { NavigationButtons } from "@/widgets/viewQuizPage/ui/NavigationButtons";
+import { ProgressBar } from "@/widgets/viewQuizPage/ui/ProgressBar";
 import { LoadingSpinner } from "@/shared/ui/LoadingSpinner";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
-import { QuestionRenderer } from "@/widgets/ViewQuizPage/ui/QuestionRenderer";
+import { QuestionRenderer } from "@/widgets/viewQuizPage/ui/QuestionRenderer";
+import { DisplayHeadings } from "@/widgets/viewQuizPage/ui/DisplayHeadings";
+
 const ViewQuizPage = () => {
   const { id } = useParams();
   const quizId = typeof id === "string" ? id : "";
@@ -21,6 +23,7 @@ const ViewQuizPage = () => {
     answers,
     handleAnswerChange,
     navigation,
+    getHeadingsForQuestion,
   } = useQuizViewer(quizId);
 
   const handleSubmit = (answers: Record<string, string | string[]>) => {
@@ -57,6 +60,9 @@ const ViewQuizPage = () => {
     );
   }
 
+  const currentQuestionHeadings = getHeadingsForQuestion(currentQuestionIndex);
+
+  console.log("Current Answers:", quiz);
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -68,6 +74,8 @@ const ViewQuizPage = () => {
           current={currentQuestionIndex + 1}
           total={questions.length}
         />
+
+        <DisplayHeadings headings={currentQuestionHeadings} />
 
         <QuestionRenderer
           item={questions[currentQuestionIndex]}

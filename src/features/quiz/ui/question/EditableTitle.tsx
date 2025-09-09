@@ -1,6 +1,6 @@
 import React from "react";
-import { useEditable } from "@/shared/ui/Editables/model/useEditable";
-import { EditActionButtons } from "@/shared/ui/Editables/ui/EditActionButtons";
+import { useEditable } from "@/shared/ui/editables/model/useEditable";
+import { EditActionButtons } from "@/shared/ui/editables/ui/EditActionButtons";
 
 interface EditableTitleProps {
   title: string;

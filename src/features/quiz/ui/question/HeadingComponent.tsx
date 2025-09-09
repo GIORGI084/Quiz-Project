@@ -1,5 +1,5 @@
 import React, { forwardRef, type HTMLAttributes } from "react";
-import { EditableHeading } from "@/shared/ui/Editables/ui/EditableHeading";
+import { EditableHeading } from "@/shared/ui/editables/ui/EditableHeading";
 import type { Heading as HeadingState } from "@/shared/model/quiz";
 
 type HeadingComponentProps = {

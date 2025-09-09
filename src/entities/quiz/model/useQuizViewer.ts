@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { StoredQuizType } from "@/shared/model/quiz";
 import { getQuiz } from "@/entities/quiz/model/handleStorage";
 
@@ -18,10 +18,41 @@ export const useQuizViewer = (quizId: string) => {
     setLoading(false);
   }, [quizId]);
 
-  const questions = useMemo(
-    () => quiz?.layout.filter((item) => item.type !== "heading") || [],
-    [quiz]
-  );
+  const questions =
+    quiz?.layout.filter((item) => item.type !== "heading") || [];
+
+  const getHeadingsForQuestion = (
+    questionIndex: number
+  ): Array<{ id: string; text: string; type: "heading" }> => {
+    if (
+      !quiz ||
+      !quiz.layout ||
+      questionIndex < 0 ||
+      questionIndex >= questions.length
+    ) {
+      return [];
+    }
+
+    const currentQuestion = questions[questionIndex];
+    const currentQuestionLayoutIndex = quiz.layout.findIndex(
+      (item) => item.id === currentQuestion.id
+    );
+
+    if (currentQuestionLayoutIndex === -1) return [];
+
+    const headings: Array<{ id: string; text: string; type: "heading" }> = [];
+
+    for (let i = currentQuestionLayoutIndex - 1; i >= 0; i--) {
+      const item = quiz.layout[i];
+      if (item.type === "heading" && "text" in item) {
+        headings.unshift(item as { id: string; text: string; type: "heading" });
+      } else if (item.type !== "heading") {
+        break;
+      }
+    }
+
+    return headings;
+  };
 
   const handleAnswerChange = useCallback(
     (questionId: string, value: string | string[]) => {
@@ -45,5 +76,6 @@ export const useQuizViewer = (quizId: string) => {
     answers,
     handleAnswerChange,
     navigation,
+    getHeadingsForQuestion,
   };
 };

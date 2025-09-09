@@ -5,7 +5,7 @@ import {
   Draggable,
   type DropResult,
 } from "@hello-pangea/dnd";
-import { EditableInput } from "@/shared/ui/Editables/ui/EditableInput";
+import { EditableInput } from "@/shared/ui/editables/ui/EditableInput";
 import type { QuestionInputTypes, QuestionState } from "@/shared/model/quiz";
 
 type DraggableOptionsListProps = {
