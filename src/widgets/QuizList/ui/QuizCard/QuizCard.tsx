@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Button } from "@/shared/ui/Button";
 import { useRouter } from "next/navigation";
 import type { StoredQuizType } from "@/shared/model/quiz";
 
@@ -41,19 +41,13 @@ const QuizCard = ({ quiz }: { quiz: StoredQuizType }) => {
         </div>
       </div>
       <div className="flex gap-3">
-        <button
-          onClick={handleEditClick}
-          className="flex items-center justify-center p-[10px] px-[50px] py-2 text-sm font-medium text-gray-700 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
-        >
+        <Button onClick={handleEditClick} type="secondary">
           Edit
-        </button>
+        </Button>
 
-        <button
-          onClick={handleViewClick}
-          className="flex items-center justify-center p-[10px] px-[50px] py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors duration-200"
-        >
+        <Button onClick={handleViewClick} type="primary">
           View
-        </button>
+        </Button>
       </div>
     </div>
   );

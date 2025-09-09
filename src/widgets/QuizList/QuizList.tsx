@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-
+import { Button } from "@/shared/ui/Button";
 import { QuizCard } from "./ui/QuizCard/QuizCard";
 import type { StoredQuizType } from "@/shared/model/quiz";
 import { getQuizzes } from "@/entities/quiz/model/handleStorage";
@@ -43,12 +42,11 @@ const QuizList = () => {
           <p className="text-gray-500 mb-6">
             Get started by creating your first quiz
           </p>
-          <Link
+          <Button
             href="/quiz/edit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200"
           >
             Create Your First Quiz
-          </Link>
+          </Button>
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

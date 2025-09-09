@@ -3,7 +3,7 @@ import { useParams, useRouter } from "next/navigation";
 import { EditPageContext } from "@/widgets/editPage/model/EditPageContextProvider";
 import { createQuiz, editQuiz } from "@/entities/quiz/model/handleStorage";
 import type { QuizType } from "@/shared/model/quiz";
-
+import { Button } from "@/shared/ui/Button";
 const Header = () => {
   const context = useContext(EditPageContext);
   const { id } = useParams();
@@ -35,7 +35,7 @@ const Header = () => {
   };
 
   const handlePublish = () => {
-    quizContainer.published = true;
+    quizContainer.published = !quizContainer.published;
     handleSave();
   };
 
@@ -57,19 +57,24 @@ const Header = () => {
       </div>
 
       <div className="flex items-center gap-3">
-        <button
+        <Button
           onClick={handleSave}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+          type="secondary"
+          className="gap-2 px-4 py-2 p-0"
         >
           {id ? "Update" : "Save"}
-        </button>
-
-        <button
+        </Button>
+        <Button
           onClick={handlePublish}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors"
+          type="primary"
+          className={`gap-2 px-4 py-2 p-0 ${
+            quizContainer.published
+              ? "bg-red-600 hover:bg-red-700 disabled:hover:bg-red-600"
+              : ""
+          }`}
         >
-          Publish
-        </button>
+          {quizContainer.published ? "Unpublish" : "Publish"}
+        </Button>
       </div>
     </section>
   );

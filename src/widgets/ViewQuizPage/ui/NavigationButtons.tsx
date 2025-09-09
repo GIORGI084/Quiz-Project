@@ -1,3 +1,5 @@
+import { Button } from "@/shared/ui/Button";
+
 interface NavigationButtonsProps {
   currentIndex: number;
   totalQuestions: number;
@@ -29,19 +31,21 @@ const NavigationButtons = ({
       </div>
       <div>
         {isLastQuestion ? (
-          <button
+          <Button
             onClick={onSubmit}
-            className="px-8 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 font-semibold transition-colors"
+            type="primary"
+            className="px-8 py-3 p-0 bg-green-600 hover:bg-green-700 font-semibold"
           >
             Submit Quiz
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={onNext}
-            className="px-8 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-semibold transition-colors"
+            type="primary"
+            className="px-8 py-3 p-0 font-semibold"
           >
             Next
-          </button>
+          </Button>
         )}
       </div>
     </div>

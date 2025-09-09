@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Droppable, Draggable } from "@hello-pangea/dnd";
-import { Question } from "@/features/quiz/ui/Question";
+import { Question } from "@/features/quiz/ui/question/Question";
 import { EditPageContext } from "@/widgets/editPage/model/EditPageContextProvider";
 import { EmptyCanvas } from "@/widgets/editPage/ui/CenterCanves/ui/EmptyCanvas";
 const CenterCanvas = () => {

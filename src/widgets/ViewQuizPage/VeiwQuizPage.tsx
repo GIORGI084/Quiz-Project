@@ -4,11 +4,10 @@ import { useQuizViewer } from "@/entities/quiz/model/useQuizViewer";
 import { Header } from "@/shared/ui/Header";
 import { QuizHeader } from "@/widgets/ViewQuizPage/ui/QuizHeader ";
 import { QUIZ_MESSAGES } from "@/shared/constants/messages";
-import { useQuizSubmission } from "@/entities/quiz/model/useQuizSubmission";
 import { NavigationButtons } from "@/widgets/ViewQuizPage/ui/NavigationButtons";
 import { ProgressBar } from "@/widgets/ViewQuizPage/ui/ProgressBar";
-import { LoadingSpinner } from "@/shared/ui/LoadingSpinner/LoadingSpinner";
-import { ErrorMessage } from "@/shared/ui/ErrorMessage/ErrorMessage";
+import { LoadingSpinner } from "@/shared/ui/LoadingSpinner";
+import { ErrorMessage } from "@/shared/ui/ErrorMessage";
 import { QuestionRenderer } from "@/widgets/ViewQuizPage/ui/QuestionRenderer";
 const ViewQuizPage = () => {
   const { id } = useParams();
@@ -24,7 +23,12 @@ const ViewQuizPage = () => {
     navigation,
   } = useQuizViewer(quizId);
 
-  const { handleSubmit } = useQuizSubmission();
+  const handleSubmit = (answers: Record<string, string | string[]>) => {
+    console.log("Quiz submitted with answers:", answers);
+    alert(
+      "Quiz submitted successfully! view answers page will be added correctly answers are stored in answers object in console"
+    );
+  };
 
   if (loading) {
     return (
