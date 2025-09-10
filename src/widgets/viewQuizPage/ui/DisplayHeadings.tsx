@@ -1,13 +1,8 @@
 import React from "react";
-
-interface HeadingItem {
-  id: string;
-  text: string;
-  type: "heading";
-}
-
+import { HeadingItem } from "@/widgets/viewQuizPage/ui/HeadingItem";
+import type { Heading } from "@/shared/model/quiz";
 interface DisplayHeadingsProps {
-  headings: HeadingItem[];
+  headings: Heading[];
 }
 
 const DisplayHeadings: React.FC<DisplayHeadingsProps> = ({ headings }) => {
@@ -17,12 +12,8 @@ const DisplayHeadings: React.FC<DisplayHeadingsProps> = ({ headings }) => {
 
   return (
     <div className="mb-6 space-y-3">
-      {headings.map((heading) => (
-        <div key={heading.id} className=" pb-2">
-          <h2 className="text-xl font-semibold text-gray-800 leading-tight">
-            {heading.text}
-          </h2>
-        </div>
+      {headings.map((elm) => (
+        <HeadingItem heading={elm} key={elm.id} />
       ))}
     </div>
   );

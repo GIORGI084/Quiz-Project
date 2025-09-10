@@ -1,11 +1,8 @@
 import React, { forwardRef, type HTMLAttributes } from "react";
 import { useQuestion } from "@/features/quiz/model/useQuestion";
-import { HeadingComponent } from "@/features/quiz/ui/question/HeadingComponent";
+import { TextComponent } from "@/features/quiz/ui/question/TextComponent";
 import { QuestionContent } from "@/features/quiz/ui/question/QuestionContent";
-import type {
-  Heading as HeadingState,
-  QuestionState,
-} from "@/shared/model/quiz";
+import type { Heading, Footer, QuestionState } from "@/shared/model/quiz";
 
 type QuestionProps = {
   questionId: string;
@@ -29,9 +26,20 @@ const Question = forwardRef<HTMLDivElement, QuestionProps>(function Question(
 
   if (item.type === "heading") {
     return (
-      <HeadingComponent
+      <TextComponent
         ref={ref}
-        heading={item as HeadingState}
+        element={item as Heading}
+        onTextChange={handleHeadingTextChange}
+        {...rest}
+      />
+    );
+  }
+
+  if (item.type === "footer") {
+    return (
+      <TextComponent
+        ref={ref}
+        element={item as Footer}
         onTextChange={handleHeadingTextChange}
         {...rest}
       />

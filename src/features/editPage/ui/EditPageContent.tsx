@@ -43,6 +43,12 @@ const EditPageContent = () => {
           text: "New Heading",
           type: "heading" as const,
         };
+      } else if (draggedItemId === "footer-template") {
+        newItem = {
+          id: uuidv4(),
+          text: "New footer",
+          type: "footer" as const,
+        };
       } else {
         console.warn(`Unknown template type: ${draggedItemId}`);
         return;

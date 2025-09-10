@@ -5,10 +5,11 @@ import type {
   LayoutItem,
   QuestionInputTypes,
   Heading as HeadingState,
+  Footer,
   QuestionState,
 } from "@/shared/model/quiz";
 
-type ItemState = QuestionState | HeadingState;
+type ItemState = QuestionState | HeadingState | Footer;
 
 export const useQuestion = (questionId: string) => {
   const [item, setItem] = useState<ItemState>({

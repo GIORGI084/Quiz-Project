@@ -4,7 +4,7 @@ function createQuiz(quiz: QuizType): void {
   const id = Date.now().toString();
   const createdAt = new Date().toLocaleString();
   const quizzes = JSON.parse(localStorage.getItem("quizzes") || "[]");
-  quizzes.push({ ...quiz, id, createdAt });
+  quizzes.unshift({ ...quiz, id, createdAt });
   localStorage.setItem("quizzes", JSON.stringify(quizzes));
 }
 

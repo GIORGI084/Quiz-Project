@@ -2,13 +2,13 @@ import React from "react";
 import { useEditable } from "@/shared/ui/editables/model/useEditable";
 import { EditActionButtons } from "@/shared/ui/editables/ui/EditActionButtons";
 
-interface EditableHeadingProps {
+interface EditableTextProps {
   text: string;
   onTextChange: (newText: string) => void;
   className?: string;
 }
 
-const EditableHeading: React.FC<EditableHeadingProps> = ({
+const EditableText: React.FC<EditableTextProps> = ({
   text,
   onTextChange,
   className = "",
@@ -63,4 +63,4 @@ const EditableHeading: React.FC<EditableHeadingProps> = ({
   );
 };
 
-export { EditableHeading };
+export { EditableText };

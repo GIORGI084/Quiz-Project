@@ -8,8 +8,9 @@ import { NavigationButtons } from "@/widgets/viewQuizPage/ui/NavigationButtons";
 import { ProgressBar } from "@/widgets/viewQuizPage/ui/ProgressBar";
 import { LoadingSpinner } from "@/shared/ui/LoadingSpinner";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
-import { QuestionRenderer } from "@/widgets/viewQuizPage/ui/QuestionRenderer";
+import { QuestionRenderer } from "@/widgets/viewQuizPage/ui/questionRenderer/QuestionRenderer";
 import { DisplayHeadings } from "@/widgets/viewQuizPage/ui/DisplayHeadings";
+import { DisplayFooters } from "@/widgets/viewQuizPage/ui/DisplayFooter";
 
 const ViewQuizPage = () => {
   const { id } = useParams();
@@ -24,12 +25,13 @@ const ViewQuizPage = () => {
     handleAnswerChange,
     navigation,
     getHeadingsForQuestion,
+    getFootersForQuestion,
   } = useQuizViewer(quizId);
 
   const handleSubmit = (answers: Record<string, string | string[]>) => {
     console.log("Quiz submitted with answers:", answers);
     alert(
-      "Quiz submitted successfully! view answers page will be added correctly answers are stored in answers object in console"
+      "Quiz submitted successfully! view answers page will be added answers are stored in answers object showed in console"
     );
   };
 
@@ -61,8 +63,8 @@ const ViewQuizPage = () => {
   }
 
   const currentQuestionHeadings = getHeadingsForQuestion(currentQuestionIndex);
+  const currentQuestionFooters = getFootersForQuestion(currentQuestionIndex);
 
-  console.log("Current Answers:", quiz);
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -85,6 +87,8 @@ const ViewQuizPage = () => {
           onAnswerChange={handleAnswerChange}
         />
 
+        <DisplayFooters footers={currentQuestionFooters} />
+
         <NavigationButtons
           currentIndex={currentQuestionIndex}
           totalQuestions={questions.length}
@@ -96,4 +100,5 @@ const ViewQuizPage = () => {
     </div>
   );
 };
+
 export { ViewQuizPage };

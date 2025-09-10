@@ -19,7 +19,9 @@ export const useQuizViewer = (quizId: string) => {
   }, [quizId]);
 
   const questions =
-    quiz?.layout.filter((item) => item.type !== "heading") || [];
+    quiz?.layout.filter(
+      (item) => item.type !== "heading" && item.type !== "footer"
+    ) || [];
 
   const getHeadingsForQuestion = (
     questionIndex: number
@@ -54,6 +56,39 @@ export const useQuizViewer = (quizId: string) => {
     return headings;
   };
 
+  const getFootersForQuestion = (
+    questionIndex: number
+  ): Array<{ id: string; text: string; type: "footer" }> => {
+    if (
+      !quiz ||
+      !quiz.layout ||
+      questionIndex < 0 ||
+      questionIndex >= questions.length
+    ) {
+      return [];
+    }
+
+    const currentQuestion = questions[questionIndex];
+    const currentQuestionLayoutIndex = quiz.layout.findIndex(
+      (item) => item.id === currentQuestion.id
+    );
+
+    if (currentQuestionLayoutIndex === -1) return [];
+
+    const footers: Array<{ id: string; text: string; type: "footer" }> = [];
+
+    for (let i = currentQuestionLayoutIndex + 1; i < quiz.layout.length; i++) {
+      const item = quiz.layout[i];
+      if (item.type === "footer" && "text" in item) {
+        footers.push(item as { id: string; text: string; type: "footer" });
+      } else {
+        break;
+      }
+    }
+
+    return footers;
+  };
+
   const handleAnswerChange = useCallback(
     (questionId: string, value: string | string[]) => {
       setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -77,5 +112,6 @@ export const useQuizViewer = (quizId: string) => {
     handleAnswerChange,
     navigation,
     getHeadingsForQuestion,
+    getFootersForQuestion,
   };
 };

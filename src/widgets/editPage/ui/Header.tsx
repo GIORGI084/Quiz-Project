@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, type ChangeEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { EditPageContext } from "@/widgets/editPage/model/EditPageContextProvider";
 import { createQuiz, editQuiz } from "@/entities/quiz/model/handleStorage";
@@ -22,10 +22,8 @@ const Header = () => {
 
       if (id && typeof id === "string") {
         editQuiz(quizToSave);
-        console.log(`Quiz with ID ${id} has been updated`);
       } else {
         createQuiz(quizToSave);
-        console.log("New quiz has been created");
       }
 
       router.push("/");
@@ -39,18 +37,19 @@ const Header = () => {
     handleSave();
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setQuizContainer((prev: QuizType) => ({
+      ...prev,
+      title: e.target.value,
+    }));
+
   return (
     <section className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
       <div className="flex items-center gap-4 flex-1">
         <input
           type="text"
           value={quizContainer.title}
-          onChange={(e) =>
-            setQuizContainer((prev: QuizType) => ({
-              ...prev,
-              title: e.target.value,
-            }))
-          }
+          onChange={handleChange}
           placeholder="Enter quiz title..."
           className="text-xl font-semibold bg-transparent border-none outline-none placeholder-gray-400 flex-1"
         />

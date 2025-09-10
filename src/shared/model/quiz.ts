@@ -19,13 +19,19 @@ interface Heading {
   type: "heading";
 }
 
+interface Footer {
+  text: string;
+  id: string;
+  type: "footer";
+}
+
 interface Button {
   id: string;
   text: string;
   url?: string;
   type: "button";
 }
-type LayoutItem = Question | Heading | Button;
+type LayoutItem = Question | Heading | Button | Footer;
 
 interface QuizType {
   title: string;
@@ -52,5 +58,6 @@ export type {
   QuestionInputTypes,
   LayoutItem,
   Option,
+  Footer,
   QuestionState,
 };

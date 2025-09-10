@@ -8,7 +8,6 @@ const CenterCanvas = () => {
 
   if (!context) return null;
   const { quizLayout } = context;
-  console.log(quizLayout);
 
   return (
     <Droppable droppableId="canvas" direction="vertical">
