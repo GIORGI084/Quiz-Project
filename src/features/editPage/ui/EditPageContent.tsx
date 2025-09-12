@@ -8,6 +8,23 @@ import { RightSidebar } from "@/widgets/editPage/ui/RightSidebar";
 import { CenterCanvas } from "@/widgets/editPage/ui/CenterCanves/CenterCanvas";
 import { EditPageContext } from "@/widgets/editPage/model/EditPageContextProvider";
 
+enum ItemType {
+  Heading = "heading",
+  Footer = "footer",
+  Radio = "radio",
+}
+
+enum TemplateId {
+  Question = "question-template",
+  Heading = "heading-template",
+  Footer = "footer-template",
+}
+
+enum DroppableId {
+  Sidebar = "sidebar",
+  Canvas = "canvas",
+}
+
 const EditPageContent = () => {
   const context = useContext(EditPageContext);
 
@@ -20,34 +37,34 @@ const EditPageContent = () => {
     const { source, destination } = result;
 
     if (
-      source.droppableId === "sidebar" &&
-      destination.droppableId === "canvas"
+      source.droppableId === DroppableId.Sidebar &&
+      destination.droppableId === DroppableId.Canvas
     ) {
       const draggedItemId = result.draggableId;
 
       let newItem;
 
-      if (draggedItemId === "question-template") {
+      if (draggedItemId === TemplateId.Question) {
         newItem = {
           id: uuidv4(),
           title: "New Question",
-          type: "radio" as const,
+          type: ItemType.Radio as const,
           options: [
             { id: uuidv4(), text: "Option 1", isCorrect: false },
             { id: uuidv4(), text: "Option 2", isCorrect: false },
           ],
         };
-      } else if (draggedItemId === "heading-template") {
+      } else if (draggedItemId === TemplateId.Heading) {
         newItem = {
           id: uuidv4(),
           text: "New Heading",
-          type: "heading" as const,
+          type: ItemType.Heading as const,
         };
-      } else if (draggedItemId === "footer-template") {
+      } else if (draggedItemId === TemplateId.Footer) {
         newItem = {
           id: uuidv4(),
           text: "New footer",
-          type: "footer" as const,
+          type: ItemType.Footer as const,
         };
       } else {
         console.warn(`Unknown template type: ${draggedItemId}`);
@@ -61,8 +78,8 @@ const EditPageContent = () => {
     }
 
     if (
-      source.droppableId === "canvas" &&
-      destination.droppableId === "canvas"
+      source.droppableId === DroppableId.Canvas &&
+      destination.droppableId === DroppableId.Canvas
     ) {
       const newItems = Array.from(quizLayout);
       const [reorderedItem] = newItems.splice(source.index, 1);

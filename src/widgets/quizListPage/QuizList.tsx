@@ -4,11 +4,14 @@ import { QuizCard } from "@/widgets/quizListPage/ui/QuizCard";
 import type { StoredQuizType } from "@/shared/model/quiz";
 import { getQuizzes } from "@/entities/quiz/model/handleStorage";
 import { Header } from "@/shared/ui/Header";
+import { setMockQuizzes } from "@/entities/quiz/model/handleStorage";
 import { EmptyQuizList } from "@/widgets/quizListPage/ui/EmptyQuizList";
+
 const QuizList = () => {
   const [quizzes, setQuizzes] = useState<StoredQuizType[]>([]);
 
   useEffect(() => {
+    setMockQuizzes();
     setQuizzes(getQuizzes());
   }, []);
 

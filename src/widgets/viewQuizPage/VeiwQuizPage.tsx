@@ -14,7 +14,6 @@ import { DisplayFooters } from "@/widgets/viewQuizPage/ui/DisplayFooter";
 
 const ViewQuizPage = () => {
   const { id } = useParams();
-  const quizId = typeof id === "string" ? id : "";
 
   const {
     quiz,
@@ -26,7 +25,7 @@ const ViewQuizPage = () => {
     navigation,
     getHeadingsForQuestion,
     getFootersForQuestion,
-  } = useQuizViewer(quizId);
+  } = useQuizViewer(id as string);
 
   const handleSubmit = (answers: Record<string, string | string[]>) => {
     console.log("Quiz submitted with answers:", answers);

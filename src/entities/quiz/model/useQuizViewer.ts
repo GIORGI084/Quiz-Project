@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import type { StoredQuizType } from "@/shared/model/quiz";
+import { type StoredQuizType, ItemType } from "@/shared/model/quiz";
 import { getQuiz } from "@/entities/quiz/model/handleStorage";
 
 export const useQuizViewer = (quizId: string) => {
@@ -20,12 +20,12 @@ export const useQuizViewer = (quizId: string) => {
 
   const questions =
     quiz?.layout.filter(
-      (item) => item.type !== "heading" && item.type !== "footer"
+      (item) => item.type !== ItemType.Heading && item.type !== ItemType.Footer
     ) || [];
 
   const getHeadingsForQuestion = (
     questionIndex: number
-  ): Array<{ id: string; text: string; type: "heading" }> => {
+  ): Array<{ id: string; text: string; type: ItemType.Heading }> => {
     if (
       !quiz ||
       !quiz.layout ||
@@ -42,13 +42,19 @@ export const useQuizViewer = (quizId: string) => {
 
     if (currentQuestionLayoutIndex === -1) return [];
 
-    const headings: Array<{ id: string; text: string; type: "heading" }> = [];
+    const headings: Array<{
+      id: string;
+      text: string;
+      type: ItemType.Heading;
+    }> = [];
 
     for (let i = currentQuestionLayoutIndex - 1; i >= 0; i--) {
       const item = quiz.layout[i];
-      if (item.type === "heading" && "text" in item) {
-        headings.unshift(item as { id: string; text: string; type: "heading" });
-      } else if (item.type !== "heading") {
+      if (item.type === ItemType.Heading && ItemType.Text in item) {
+        headings.unshift(
+          item as { id: string; text: string; type: ItemType.Heading }
+        );
+      } else if (item.type !== ItemType.Heading) {
         break;
       }
     }
@@ -58,7 +64,7 @@ export const useQuizViewer = (quizId: string) => {
 
   const getFootersForQuestion = (
     questionIndex: number
-  ): Array<{ id: string; text: string; type: "footer" }> => {
+  ): Array<{ id: string; text: string; type: ItemType.Footer }> => {
     if (
       !quiz ||
       !quiz.layout ||
@@ -75,12 +81,15 @@ export const useQuizViewer = (quizId: string) => {
 
     if (currentQuestionLayoutIndex === -1) return [];
 
-    const footers: Array<{ id: string; text: string; type: "footer" }> = [];
+    const footers: Array<{ id: string; text: string; type: ItemType.Footer }> =
+      [];
 
     for (let i = currentQuestionLayoutIndex + 1; i < quiz.layout.length; i++) {
       const item = quiz.layout[i];
-      if (item.type === "footer" && "text" in item) {
-        footers.push(item as { id: string; text: string; type: "footer" });
+      if (item.type === ItemType.Footer && ItemType.Text in item) {
+        footers.push(
+          item as { id: string; text: string; type: ItemType.Footer }
+        );
       } else {
         break;
       }

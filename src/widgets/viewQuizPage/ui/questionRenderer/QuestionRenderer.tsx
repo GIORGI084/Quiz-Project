@@ -4,6 +4,7 @@ import { RadioQuestion } from "@/widgets/viewQuizPage/ui/questionRenderer/ui/Rad
 import { CheckboxQuestion } from "@/widgets/viewQuizPage/ui/questionRenderer/ui/CheckboxQuestion";
 import { handleChangeOfAnswer } from "@/widgets/viewQuizPage/ui/questionRenderer/model/handleChangeOfAnswer";
 import type { LayoutItem, Question } from "@/shared/model/quiz";
+import { ItemType } from "@/shared/model/quiz";
 
 const QuestionRenderer: React.FC<QuestionRendererProps> = ({
   item,
@@ -12,20 +13,22 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
   answers,
   onAnswerChange,
 }) => {
-  if (item.type === "heading") {
+  if (item.type === ItemType.Heading) {
     return null;
   }
 
   const isQuestion = (item: LayoutItem): item is Question => {
     return (
-      item.type === "radio" || item.type === "checkbox" || item.type === "text"
+      item.type === ItemType.Radio ||
+      item.type === ItemType.Checkbox ||
+      item.type === ItemType.Text
     );
   };
 
   const createQuestionComponent = (item: LayoutItem): ReactElement | null => {
     if (isQuestion(item)) {
       switch (item.type) {
-        case "radio":
+        case ItemType.Radio:
           return (
             <RadioQuestion
               item={item}
@@ -33,7 +36,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
               answers={answers}
             />
           );
-        case "checkbox":
+        case ItemType.Checkbox:
           return (
             <CheckboxQuestion
               item={item}
@@ -41,14 +44,14 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
               answers={answers}
             />
           );
-        case "text":
+        case ItemType.Text:
           return (
             <textarea
               placeholder="Enter your answer here..."
               value={(answers[item.id] as string) || ""}
               onChange={(e) =>
                 handleChangeOfAnswer({
-                  type: "text",
+                  type: ItemType.Text,
                   questionId: item.id,
                   value: e.target.value,
                   onAnswerChange: onAnswerChange,

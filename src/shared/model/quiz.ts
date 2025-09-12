@@ -1,4 +1,17 @@
-type QuestionInputTypes = "radio" | "checkbox" | "text" | "heading";
+enum ItemType {
+  Heading = "heading",
+  Footer = "footer",
+  Text = "text",
+  Radio = "radio",
+  Checkbox = "checkbox",
+  Button = "button",
+}
+
+type QuestionInputTypes =
+  | ItemType.Radio
+  | ItemType.Checkbox
+  | ItemType.Text
+  | ItemType.Heading;
 
 interface Option {
   id: string;
@@ -16,20 +29,20 @@ interface Question {
 interface Heading {
   text: string;
   id: string;
-  type: "heading";
+  type: ItemType.Heading;
 }
 
 interface Footer {
   text: string;
   id: string;
-  type: "footer";
+  type: ItemType.Footer;
 }
 
 interface Button {
   id: string;
   text: string;
   url?: string;
-  type: "button";
+  type: ItemType.Button;
 }
 type LayoutItem = Question | Heading | Button | Footer;
 
@@ -61,3 +74,4 @@ export type {
   Footer,
   QuestionState,
 };
+export { ItemType };

@@ -1,4 +1,11 @@
 import type { QuizType, StoredQuizType } from "@/shared/model/quiz";
+import { MOCK_QUIZZES } from "@/features/constents/mockQuizzes";
+
+function setMockQuizzes() {
+  if (localStorage.getItem("quizzes") === null) {
+    localStorage.setItem("quizzes", JSON.stringify(MOCK_QUIZZES));
+  }
+}
 
 function createQuiz(quiz: QuizType): void {
   const id = Date.now().toString();
@@ -33,4 +40,19 @@ function getQuiz(id: string): StoredQuizType | boolean {
   return quizzes.find((quiz: StoredQuizType) => quiz.id === id) || false;
 }
 
-export { createQuiz, editQuiz, getQuizzes, getQuiz };
+function deleteQuiz(id: string) {
+  const quizzes = JSON.parse(localStorage.getItem("quizzes") || "[]");
+  const updatedQuizzes = quizzes.filter(
+    (quiz: StoredQuizType) => quiz.id !== id
+  );
+  localStorage.setItem("quizzes", JSON.stringify(updatedQuizzes));
+}
+
+export {
+  createQuiz,
+  editQuiz,
+  getQuizzes,
+  getQuiz,
+  setMockQuizzes,
+  deleteQuiz,
+};
