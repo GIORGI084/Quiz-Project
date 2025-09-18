@@ -1,5 +1,6 @@
 import { type DropResult } from "@hello-pangea/dnd";
 import type { QuestionState } from "@/shared/model/quiz";
+import { ItemType } from "@/shared/model/quiz";
 
 const useDragDrop = () => {
   const handleDragEnd = (
@@ -7,7 +8,7 @@ const useDragDrop = () => {
     question: QuestionState,
     onUpdate: (updatedQuestion: QuestionState) => void
   ) => {
-    if (!result.destination || question.type === "heading") return;
+    if (!result.destination || question.type === ItemType.Heading) return;
 
     const items = Array.from(question.options);
     const [reorderedItem] = items.splice(result.source.index, 1);

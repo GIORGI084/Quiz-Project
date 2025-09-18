@@ -4,6 +4,8 @@ import { EditPageContext } from "@/widgets/editPage/model/EditPageContextProvide
 import { createQuiz, editQuiz } from "@/entities/quiz/model/handleStorage";
 import type { QuizType } from "@/shared/model/quiz";
 import { Button } from "@/shared/ui/Button";
+import { DeleteButton } from "@/widgets/editPage/ui/DeleteButton";
+
 const Header = () => {
   const context = useContext(EditPageContext);
   const { id } = useParams();
@@ -56,6 +58,7 @@ const Header = () => {
       </div>
 
       <div className="flex items-center gap-3">
+        <DeleteButton id={id as string} />
         <Button
           onClick={handleSave}
           type="secondary"

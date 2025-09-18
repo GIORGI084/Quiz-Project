@@ -6,6 +6,7 @@ import { DraggableOptionsList } from "./DraggableOptionsList";
 import { TextQuestionInput } from "@/features/quiz/ui/question/TextQuestionInput ";
 import { AddOptionButton } from "./AddOptionButton";
 import type { QuestionState, QuestionInputTypes } from "@/shared/model/quiz";
+import { ItemType } from "@/shared/model/quiz";
 
 type QuestionContentProps = {
   question: QuestionState;
@@ -16,6 +17,7 @@ type QuestionContentProps = {
   onDeleteOption: (optionId: string) => void;
   onToggleCorrect: (optionId: string) => void;
   onAddOption: () => void;
+  setActiveElement: (questionId: string) => void;
 };
 
 const QuestionContent = ({
@@ -27,16 +29,22 @@ const QuestionContent = ({
   onDeleteOption,
   onToggleCorrect,
   onAddOption,
+  setActiveElement,
 }: QuestionContentProps) => {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4">
+    <div
+      className="bg-white rounded-lg border border-gray-200 p-4"
+      onClick={() => {
+        setActiveElement(question.id);
+      }}
+    >
       <div className="flex items-center justify-between mb-4">
         <EditableTitle title={question.title} settitle={onTitleChange} />
         <QuestionTypeSelector value={question.type} onChange={onTypeChange} />
       </div>
 
       <div className="mb-4">
-        {question.type !== "text" ? (
+        {question.type !== ItemType.Text ? (
           <DraggableOptionsList
             options={question.options}
             questionType={question.type}
@@ -50,7 +58,9 @@ const QuestionContent = ({
         )}
       </div>
 
-      {question.type !== "text" && <AddOptionButton onClick={onAddOption} />}
+      {question.type !== ItemType.Text && (
+        <AddOptionButton onClick={onAddOption} />
+      )}
     </div>
   );
 };

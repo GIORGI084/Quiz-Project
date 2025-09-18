@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import type { QuizType, LayoutItem } from "@/shared/model/quiz";
 import { v4 as uuidv4 } from "uuid";
-import { getQuiz } from "@/entities/quiz/model/handleStorage"; 
+import { getQuiz } from "@/entities/quiz/model/handleStorage";
 import { useParams } from "next/navigation";
 
 const EditPageContext = createContext<{
@@ -14,9 +14,14 @@ const EditPageContext = createContext<{
   setQuizContainer: React.Dispatch<React.SetStateAction<QuizType>>;
   quizLayout: LayoutItem[];
   setQuizLayout: React.Dispatch<React.SetStateAction<LayoutItem[]>>;
+  selectedElementId: string | null;
+  setSelectedElementId: React.Dispatch<React.SetStateAction<string | null>>;
 } | null>(null);
 
 const EditPageContextProvider = ({ children }: { children: ReactElement }) => {
+  const [selectedElementId, setSelectedElementId] = useState<string | null>(
+    null
+  );
   const [quizContainer, setQuizContainer] = useState<QuizType>({
     id: uuidv4(),
     title: "Add Quiz Title",
@@ -52,7 +57,14 @@ const EditPageContextProvider = ({ children }: { children: ReactElement }) => {
 
   return (
     <EditPageContext.Provider
-      value={{ quizContainer, setQuizContainer, quizLayout, setQuizLayout }}
+      value={{
+        quizContainer,
+        setQuizContainer,
+        quizLayout,
+        setQuizLayout,
+        selectedElementId,
+        setSelectedElementId,
+      }}
     >
       {children}
     </EditPageContext.Provider>

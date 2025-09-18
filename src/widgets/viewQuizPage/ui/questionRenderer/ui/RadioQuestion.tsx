@@ -1,4 +1,4 @@
-import type { Question } from "@/shared/model/quiz";
+import { type Question, ItemType } from "@/shared/model/quiz";
 import { handleChangeOfAnswer } from "@/widgets/viewQuizPage/ui/questionRenderer/model/handleChangeOfAnswer";
 type RadioQuestionProps = {
   item: Question;
@@ -25,7 +25,7 @@ const RadioQuestion: React.FC<RadioQuestionProps> = ({
             checked={answers[item.id] === option.text}
             onChange={(e) =>
               handleChangeOfAnswer({
-                type: "radio",
+                type: ItemType.Radio,
                 questionId: item.id,
                 value: e.target.value,
                 onAnswerChange: onAnswerChange,

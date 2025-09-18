@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type FC } from "react";
 import Link from "next/link";
 
 interface ButtonProps {
@@ -9,7 +9,7 @@ interface ButtonProps {
   href?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button: FC<ButtonProps> = ({
   children,
   onClick,
   type = "secondary",
