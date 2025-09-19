@@ -1,8 +1,8 @@
 import React from "react";
-import { ItemType } from "@/shared/model/quiz";
+import { ItemTypeEnum } from "@/shared/model/quiz";
 
 interface DisplayFootersProps {
-  footers: Array<{ id: string; text: string; type: ItemType.Footer }>;
+  footers: Array<{ id: string; text: string; type: ItemTypeEnum.Footer }>;
 }
 
 const DisplayFooters: React.FC<DisplayFootersProps> = ({ footers }) => {

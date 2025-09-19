@@ -3,7 +3,7 @@ const MOCK_QUIZZES = [
     id: "1757511521755",
     title: "Add Quiz Title",
     published: true,
-    updatedAt: "9/10/2025, 5:38:41 PM",
+    updatedAt: "9/18/2025, 5:38:41 PM",
     layout: [
       {
         id: "5f749df5-5e63-4fd9-b2f8-be363f922049",
@@ -94,13 +94,13 @@ const MOCK_QUIZZES = [
         ],
       },
     ],
-    createdAt: "9/10/2025, 5:38:41 PM",
+    createdAt: "9/18/2025, 5:38:41 PM",
   },
   {
     id: "1757506989191",
     title: "Add Quiz Title",
     published: false,
-    updatedAt: "9/10/2025, 4:23:09 PM",
+    updatedAt: "9/18/2025, 4:23:09 PM",
     layout: [
       {
         id: "974345f0-ef68-4b6f-81f4-16a9dbf4a001",
@@ -152,7 +152,7 @@ const MOCK_QUIZZES = [
         type: "footer",
       },
     ],
-    createdAt: "9/10/2025, 4:23:09 PM",
+    createdAt: "9/18/2025, 4:23:09 PM",
   },
 ];
 

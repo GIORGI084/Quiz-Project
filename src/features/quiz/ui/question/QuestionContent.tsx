@@ -5,13 +5,13 @@ import { QuestionTypeSelector } from "./QuestionTypeSelector";
 import { DraggableOptionsList } from "./DraggableOptionsList";
 import { TextQuestionInput } from "@/features/quiz/ui/question/TextQuestionInput ";
 import { AddOptionButton } from "./AddOptionButton";
-import type { QuestionState, QuestionInputTypes } from "@/shared/model/quiz";
-import { ItemType } from "@/shared/model/quiz";
+import type { QuestionState } from "@/shared/model/quiz";
+import { ItemTypeEnum } from "@/shared/model/quiz";
 
 type QuestionContentProps = {
   question: QuestionState;
   onTitleChange: (title: string) => void;
-  onTypeChange: (type: QuestionInputTypes) => void;
+  onTypeChange: (type: ItemTypeEnum) => void;
   onDragEnd: (result: DropResult) => void;
   onEditOption: (optionId: string, newText: string) => void;
   onDeleteOption: (optionId: string) => void;
@@ -44,7 +44,7 @@ const QuestionContent = ({
       </div>
 
       <div className="mb-4">
-        {question.type !== ItemType.Text ? (
+        {question.type !== ItemTypeEnum.Text ? (
           <DraggableOptionsList
             options={question.options}
             questionType={question.type}
@@ -58,7 +58,7 @@ const QuestionContent = ({
         )}
       </div>
 
-      {question.type !== ItemType.Text && (
+      {question.type !== ItemTypeEnum.Text && (
         <AddOptionButton onClick={onAddOption} />
       )}
     </div>

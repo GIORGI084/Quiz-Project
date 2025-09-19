@@ -3,7 +3,7 @@ import { useQuestion } from "@/features/quiz/model/useQuestion";
 import { TextComponent } from "@/features/quiz/ui/question/TextComponent";
 import { QuestionContent } from "@/features/quiz/ui/question/QuestionContent";
 import type { Heading, Footer, QuestionState } from "@/shared/model/quiz";
-import { ItemType } from "@/shared/model/quiz";
+import { ItemTypeEnum } from "@/shared/model/quiz";
 
 type QuestionProps = {
   questionId: string;
@@ -26,7 +26,7 @@ const Question = forwardRef<HTMLDivElement, QuestionProps>(function Question(
     setActiveElement,
   } = useQuestion(questionId);
 
-  if (item.type === ItemType.Heading) {
+  if (item.type === ItemTypeEnum.Heading) {
     return (
       <TextComponent
         ref={ref}
@@ -38,7 +38,7 @@ const Question = forwardRef<HTMLDivElement, QuestionProps>(function Question(
     );
   }
 
-  if (item.type === ItemType.Footer) {
+  if (item.type === ItemTypeEnum.Footer) {
     return (
       <TextComponent
         ref={ref}

@@ -6,7 +6,6 @@ import { QuizHeader } from "@/widgets/viewQuizPage/ui/QuizHeader ";
 import { QUIZ_MESSAGES } from "@/shared/constants/messages";
 import { NavigationButtons } from "@/widgets/viewQuizPage/ui/NavigationButtons";
 import { ProgressBar } from "@/widgets/viewQuizPage/ui/ProgressBar";
-import { LoadingSpinner } from "@/shared/ui/LoadingSpinner";
 import { ErrorMessage } from "@/shared/ui/ErrorMessage";
 import { QuestionRenderer } from "@/widgets/viewQuizPage/ui/questionRenderer/QuestionRenderer";
 import { DisplayHeadings } from "@/widgets/viewQuizPage/ui/DisplayHeadings";
@@ -17,7 +16,6 @@ const ViewQuizPage = () => {
 
   const {
     quiz,
-    loading,
     questions,
     currentQuestionIndex,
     answers,
@@ -34,15 +32,15 @@ const ViewQuizPage = () => {
     );
   };
 
-  if (loading) {
+  console.log(questions);
+  if (!questions || questions.length === 0) {
     return (
       <>
         <Header />
-        <LoadingSpinner />
+        <ErrorMessage message={QUIZ_MESSAGES.NO_QUESTIONS} />
       </>
     );
   }
-
   if (!quiz) {
     return (
       <>

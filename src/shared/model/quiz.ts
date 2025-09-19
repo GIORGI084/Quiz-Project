@@ -1,4 +1,4 @@
-enum ItemType {
+enum ItemTypeEnum {
   Heading = "heading",
   Footer = "footer",
   Text = "text",
@@ -6,12 +6,6 @@ enum ItemType {
   Checkbox = "checkbox",
   Button = "button",
 }
-
-type QuestionInputTypes =
-  | ItemType.Radio
-  | ItemType.Checkbox
-  | ItemType.Text
-  | ItemType.Heading;
 
 interface Option {
   id: string;
@@ -22,27 +16,27 @@ interface Option {
 interface Question {
   id: string;
   title: string;
-  type: QuestionInputTypes;
+  type: ItemTypeEnum;
   options: Option[];
 }
 
 interface Heading {
   text: string;
   id: string;
-  type: ItemType.Heading;
+  type: ItemTypeEnum.Heading;
 }
 
 interface Footer {
   text: string;
   id: string;
-  type: ItemType.Footer;
+  type: ItemTypeEnum.Footer;
 }
 
 interface Button {
   id: string;
   text: string;
   url?: string;
-  type: ItemType.Button;
+  type: ItemTypeEnum.Button;
 }
 type LayoutItem = Question | Heading | Button | Footer;
 
@@ -68,10 +62,9 @@ export type {
   Question,
   Heading,
   Button,
-  QuestionInputTypes,
   LayoutItem,
   Option,
   Footer,
   QuestionState,
 };
-export { ItemType };
+export { ItemTypeEnum };

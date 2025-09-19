@@ -4,7 +4,7 @@ import { RadioQuestion } from "@/widgets/viewQuizPage/ui/questionRenderer/ui/Rad
 import { CheckboxQuestion } from "@/widgets/viewQuizPage/ui/questionRenderer/ui/CheckboxQuestion";
 import { handleChangeOfAnswer } from "@/widgets/viewQuizPage/ui/questionRenderer/model/handleChangeOfAnswer";
 import type { LayoutItem, Question } from "@/shared/model/quiz";
-import { ItemType } from "@/shared/model/quiz";
+import { ItemTypeEnum } from "@/shared/model/quiz";
 
 const QuestionRenderer: React.FC<QuestionRendererProps> = ({
   item,
@@ -13,22 +13,22 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
   answers,
   onAnswerChange,
 }) => {
-  if (item.type === ItemType.Heading) {
+  if (item.type === ItemTypeEnum.Heading) {
     return null;
   }
 
   const isQuestion = (item: LayoutItem): item is Question => {
     return (
-      item.type === ItemType.Radio ||
-      item.type === ItemType.Checkbox ||
-      item.type === ItemType.Text
+      item.type === ItemTypeEnum.Radio ||
+      item.type === ItemTypeEnum.Checkbox ||
+      item.type === ItemTypeEnum.Text
     );
   };
 
   const createQuestionComponent = (item: LayoutItem): ReactElement | null => {
     if (isQuestion(item)) {
       switch (item.type) {
-        case ItemType.Radio:
+        case ItemTypeEnum.Radio:
           return (
             <RadioQuestion
               item={item}
@@ -36,7 +36,7 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
               answers={answers}
             />
           );
-        case ItemType.Checkbox:
+        case ItemTypeEnum.Checkbox:
           return (
             <CheckboxQuestion
               item={item}
@@ -44,14 +44,14 @@ const QuestionRenderer: React.FC<QuestionRendererProps> = ({
               answers={answers}
             />
           );
-        case ItemType.Text:
+        case ItemTypeEnum.Text:
           return (
             <textarea
               placeholder="Enter your answer here..."
               value={(answers[item.id] as string) || ""}
               onChange={(e) =>
                 handleChangeOfAnswer({
-                  type: ItemType.Text,
+                  type: ItemTypeEnum.Text,
                   questionId: item.id,
                   value: e.target.value,
                   onAnswerChange: onAnswerChange,

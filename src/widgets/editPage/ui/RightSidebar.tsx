@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { EditPageContext } from "@/widgets/editPage/model/EditPageContextProvider";
 import { Button } from "@/shared/ui/Button";
-import { ItemType, type LayoutItem } from "@/shared/model/quiz";
+import { ItemTypeEnum, type LayoutItem } from "@/shared/model/quiz";
+import WarningIcon from "@/icons/WarningIcon";
 
 const RightSidebar = () => {
   const context = useContext(EditPageContext);
@@ -40,13 +41,13 @@ const RightSidebar = () => {
 
   const getElementTypeLabel = (element: LayoutItem): string => {
     switch (element.type) {
-      case ItemType.Heading:
+      case ItemTypeEnum.Heading:
         return "Heading";
-      case ItemType.Radio:
+      case ItemTypeEnum.Radio:
         return "Multiple Choice Question";
-      case ItemType.Checkbox:
+      case ItemTypeEnum.Checkbox:
         return "Checkbox Question";
-      case ItemType.Footer:
+      case ItemTypeEnum.Footer:
         return "Footer";
       default:
         return "Element";
@@ -82,17 +83,7 @@ const RightSidebar = () => {
             <div className="p-4 bg-red-50 rounded-lg">
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0">
-                  <svg
-                    className="w-5 h-5 text-red-600 mt-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <WarningIcon />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h5 className="text-sm font-medium text-red-900 mb-2">

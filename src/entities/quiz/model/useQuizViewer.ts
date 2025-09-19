@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import { type StoredQuizType, ItemType } from "@/shared/model/quiz";
+import { type StoredQuizType, ItemTypeEnum } from "@/shared/model/quiz";
 import { getQuiz } from "@/entities/quiz/model/handleStorage";
 
 export const useQuizViewer = (quizId: string) => {
   const [quiz, setQuiz] = useState<StoredQuizType | null>(null);
-  const [loading, setLoading] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
 
@@ -15,17 +14,17 @@ export const useQuizViewer = (quizId: string) => {
         setQuiz(fetchedQuiz);
       }
     }
-    setLoading(false);
   }, [quizId]);
 
   const questions =
     quiz?.layout.filter(
-      (item) => item.type !== ItemType.Heading && item.type !== ItemType.Footer
+      (item) =>
+        item.type !== ItemTypeEnum.Heading && item.type !== ItemTypeEnum.Footer
     ) || [];
 
   const getHeadingsForQuestion = (
     questionIndex: number
-  ): Array<{ id: string; text: string; type: ItemType.Heading }> => {
+  ): Array<{ id: string; text: string; type: ItemTypeEnum.Heading }> => {
     if (
       !quiz ||
       !quiz.layout ||
@@ -45,16 +44,16 @@ export const useQuizViewer = (quizId: string) => {
     const headings: Array<{
       id: string;
       text: string;
-      type: ItemType.Heading;
+      type: ItemTypeEnum.Heading;
     }> = [];
 
     for (let i = currentQuestionLayoutIndex - 1; i >= 0; i--) {
       const item = quiz.layout[i];
-      if (item.type === ItemType.Heading && ItemType.Text in item) {
+      if (item.type === ItemTypeEnum.Heading && ItemTypeEnum.Text in item) {
         headings.unshift(
-          item as { id: string; text: string; type: ItemType.Heading }
+          item as { id: string; text: string; type: ItemTypeEnum.Heading }
         );
-      } else if (item.type !== ItemType.Heading) {
+      } else if (item.type !== ItemTypeEnum.Heading) {
         break;
       }
     }
@@ -64,7 +63,7 @@ export const useQuizViewer = (quizId: string) => {
 
   const getFootersForQuestion = (
     questionIndex: number
-  ): Array<{ id: string; text: string; type: ItemType.Footer }> => {
+  ): Array<{ id: string; text: string; type: ItemTypeEnum.Footer }> => {
     if (
       !quiz ||
       !quiz.layout ||
@@ -81,14 +80,17 @@ export const useQuizViewer = (quizId: string) => {
 
     if (currentQuestionLayoutIndex === -1) return [];
 
-    const footers: Array<{ id: string; text: string; type: ItemType.Footer }> =
-      [];
+    const footers: Array<{
+      id: string;
+      text: string;
+      type: ItemTypeEnum.Footer;
+    }> = [];
 
     for (let i = currentQuestionLayoutIndex + 1; i < quiz.layout.length; i++) {
       const item = quiz.layout[i];
-      if (item.type === ItemType.Footer && ItemType.Text in item) {
+      if (item.type === ItemTypeEnum.Footer && ItemTypeEnum.Text in item) {
         footers.push(
-          item as { id: string; text: string; type: ItemType.Footer }
+          item as { id: string; text: string; type: ItemTypeEnum.Footer }
         );
       } else {
         break;
@@ -114,7 +116,6 @@ export const useQuizViewer = (quizId: string) => {
 
   return {
     quiz,
-    loading,
     questions,
     currentQuestionIndex,
     answers,

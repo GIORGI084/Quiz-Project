@@ -6,11 +6,11 @@ import {
   type DropResult,
 } from "@hello-pangea/dnd";
 import { EditableInput } from "@/shared/ui/editables/ui/EditableInput";
-import type { QuestionInputTypes, QuestionState } from "@/shared/model/quiz";
+import type { ItemTypeEnum, QuestionState } from "@/shared/model/quiz";
 
 type DraggableOptionsListProps = {
   options: QuestionState["options"];
-  questionType: QuestionInputTypes;
+  questionType: ItemTypeEnum;
   onDragEnd: (result: DropResult) => void;
   onEditOption: (optionId: string, newText: string) => void;
   onDeleteOption: (optionId: string) => void;

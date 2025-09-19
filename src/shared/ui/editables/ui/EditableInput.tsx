@@ -1,12 +1,13 @@
 import React from "react";
 import { useEditable } from "@/shared/ui/editables/model/useEditable";
 import { EditActionButtons } from "./EditActionButtons";
-import { Option, QuestionInputTypes } from "@/shared/model/quiz";
+import { Option, ItemTypeEnum } from "@/shared/model/quiz";
+import classNames from "classnames";
 
 interface OptionInputProps {
   option: Option;
   index: number;
-  type: QuestionInputTypes;
+  type: ItemTypeEnum;
   onEdit: (optionId: string, newText: string) => void;
   onDelete: (optionId: string) => void;
   onToggleCorrect: (optionId: string) => void;
@@ -39,11 +40,13 @@ const EditableInput: React.FC<OptionInputProps> = ({
 
   return (
     <div
-      className={`
-        bg-white border border-gray-200 rounded px-2 py-1 flex items-center gap-2
-        ${isDragging ? "shadow-lg" : "shadow-sm hover:shadow-md"}
-        transition-all duration-200
-      `}
+      className={classNames(
+        "bg-white border border-gray-200 rounded px-2 py-1 flex items-center gap-2 transition-all duration-200",
+        {
+          "shadow-lg": isDragging,
+          "shadow-sm hover:shadow-md": !isDragging,
+        }
+      )}
     >
       <div className="cursor-grab active:cursor-grabbing text-gray-400">⋮⋮</div>
 
@@ -70,9 +73,10 @@ const EditableInput: React.FC<OptionInputProps> = ({
           />
         ) : (
           <span
-            className={`text-sm block max-w-[446px] break-words ${
-              option.isCorrect ? "text-green-700 font-medium" : "text-gray-700"
-            }`}
+            className={classNames("text-sm block max-w-[446px] break-words", {
+              "text-green-700 font-medium": option.isCorrect,
+              "text-gray-700": !option.isCorrect,
+            })}
           >
             {option.text}
           </span>

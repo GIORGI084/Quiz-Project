@@ -1,7 +1,7 @@
 import React, { forwardRef, type HTMLAttributes } from "react";
 import { EditableText } from "@/shared/ui/editables/ui/EditableText";
 import type { Heading, Footer } from "@/shared/model/quiz";
-import { ItemType } from "@/shared/model/quiz";
+import { ItemTypeEnum } from "@/shared/model/quiz";
 
 type TextComponentProps = {
   element: Heading | Footer;
@@ -11,7 +11,7 @@ type TextComponentProps = {
 
 const TextComponent = forwardRef<HTMLDivElement, TextComponentProps>(
   ({ element, onTextChange, setActiveElement, ...rest }, ref) => {
-    const isFooter = element.type === ItemType.Footer;
+    const isFooter = element.type === ItemTypeEnum.Footer;
 
     return (
       <div

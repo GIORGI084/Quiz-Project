@@ -7,12 +7,7 @@ import { LeftSidebar } from "@/widgets/editPage/ui/LeftSidebar";
 import { RightSidebar } from "@/widgets/editPage/ui/RightSidebar";
 import { CenterCanvas } from "@/widgets/editPage/ui/CenterCanves/CenterCanvas";
 import { EditPageContext } from "@/widgets/editPage/model/EditPageContextProvider";
-
-enum ItemType {
-  Heading = "heading",
-  Footer = "footer",
-  Radio = "radio",
-}
+import { ItemTypeEnum } from "@/shared/model/quiz";
 
 enum TemplateId {
   Question = "question-template",
@@ -48,7 +43,7 @@ const EditPageContent = () => {
         newItem = {
           id: uuidv4(),
           title: "New Question",
-          type: ItemType.Radio as const,
+          type: ItemTypeEnum.Radio as const,
           options: [
             { id: uuidv4(), text: "Option 1", isCorrect: false },
             { id: uuidv4(), text: "Option 2", isCorrect: false },
@@ -58,13 +53,13 @@ const EditPageContent = () => {
         newItem = {
           id: uuidv4(),
           text: "New Heading",
-          type: ItemType.Heading as const,
+          type: ItemTypeEnum.Heading as const,
         };
       } else if (draggedItemId === TemplateId.Footer) {
         newItem = {
           id: uuidv4(),
           text: "New footer",
-          type: ItemType.Footer as const,
+          type: ItemTypeEnum.Footer as const,
         };
       } else {
         console.warn(`Unknown template type: ${draggedItemId}`);

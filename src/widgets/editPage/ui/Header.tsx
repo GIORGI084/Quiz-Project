@@ -5,6 +5,7 @@ import { createQuiz, editQuiz } from "@/entities/quiz/model/handleStorage";
 import type { QuizType } from "@/shared/model/quiz";
 import { Button } from "@/shared/ui/Button";
 import { DeleteButton } from "@/widgets/editPage/ui/DeleteButton";
+import classNames from "classnames";
 
 const Header = () => {
   const context = useContext(EditPageContext);
@@ -69,11 +70,11 @@ const Header = () => {
         <Button
           onClick={handlePublish}
           type="primary"
-          className={`gap-2 px-4 py-2 p-0 ${
-            quizContainer.published
-              ? "bg-red-600 hover:bg-red-700 disabled:hover:bg-red-600"
-              : ""
-          }`}
+          className={classNames(
+            "gap-2 px-4 py-2 p-0",
+            quizContainer.published &&
+              "bg-red-600 hover:bg-red-700 disabled:hover:bg-red-600"
+          )}
         >
           {quizContainer.published ? "Unpublish" : "Publish"}
         </Button>

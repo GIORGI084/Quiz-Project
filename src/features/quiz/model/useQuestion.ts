@@ -3,11 +3,10 @@ import { type DropResult } from "@hello-pangea/dnd";
 import { EditPageContext } from "@/widgets/editPage/model/EditPageContextProvider";
 import {
   LayoutItem,
-  QuestionInputTypes,
   Heading as HeadingState,
   Footer,
   QuestionState,
-  ItemType,
+  ItemTypeEnum,
 } from "@/shared/model/quiz";
 
 type ItemState = QuestionState | HeadingState | Footer;
@@ -30,7 +29,7 @@ export const useQuestion = (questionId: string) => {
 
     if (!found) return;
 
-    if (found.type === ItemType.Heading) {
+    if (found.type === ItemTypeEnum.Heading) {
       setItem(found as HeadingState);
     } else {
       setItem(found as QuestionState);
@@ -60,7 +59,7 @@ export const useQuestion = (questionId: string) => {
 
   const handleEditOption = useCallback(
     (optionId: string, newText: string) => {
-      if (item.type === ItemType.Heading) return;
+      if (item.type === ItemTypeEnum.Heading) return;
 
       const questionItem = item as QuestionState;
       const updatedItem = {
@@ -77,7 +76,7 @@ export const useQuestion = (questionId: string) => {
 
   const handleDeleteOption = useCallback(
     (optionId: string) => {
-      if (item.type === ItemType.Heading) return;
+      if (item.type === ItemTypeEnum.Heading) return;
 
       const questionItem = item as QuestionState;
       const updatedItem = {
@@ -92,7 +91,7 @@ export const useQuestion = (questionId: string) => {
 
   const handleToggleCorrect = useCallback(
     (optionId: string) => {
-      if (item.type === ItemType.Heading) return;
+      if (item.type === ItemTypeEnum.Heading) return;
 
       const questionItem = item as QuestionState;
       const updatedItem = {
@@ -114,7 +113,7 @@ export const useQuestion = (questionId: string) => {
   );
 
   const handleAddOption = useCallback(() => {
-    if (item.type === ItemType.Heading) return;
+    if (item.type === ItemTypeEnum.Heading) return;
 
     const questionItem = item as QuestionState;
     const newOption = {
@@ -131,8 +130,11 @@ export const useQuestion = (questionId: string) => {
   }, [item, updateQuizLayout]);
 
   const handleTypeChange = useCallback(
-    (newType: QuestionInputTypes) => {
-      if (item.type === ItemType.Heading || newType === ItemType.Heading)
+    (newType: ItemTypeEnum) => {
+      if (
+        item.type === ItemTypeEnum.Heading ||
+        newType === ItemTypeEnum.Heading
+      )
         return;
 
       const questionItem = item as QuestionState;
@@ -159,7 +161,7 @@ export const useQuestion = (questionId: string) => {
 
   const handleTitleChange = useCallback(
     (newTitle: string) => {
-      if (item.type === ItemType.Heading) return;
+      if (item.type === ItemTypeEnum.Heading) return;
 
       const questionItem = item as QuestionState;
       const updatedItem = {
@@ -174,7 +176,7 @@ export const useQuestion = (questionId: string) => {
 
   const handleDragEnd = useCallback(
     (result: DropResult) => {
-      if (!result.destination || item.type === ItemType.Heading) return;
+      if (!result.destination || item.type === ItemTypeEnum.Heading) return;
 
       const questionItem = item as QuestionState;
       const items = Array.from(questionItem.options);

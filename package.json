@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
-    "@types/uuid": "^10.0.0",
+    "classnames": "^2.5.1",
+    "tailwindcss": "^4",
     "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -20,11 +21,11 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/uuid": "^10.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
-    "tailwindcss": "^4",
     "typescript": "^5"
   }
 }

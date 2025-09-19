@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@/shared/ui/Button";
 import { useRouter } from "next/navigation";
 import type { StoredQuizType } from "@/shared/model/quiz";
+import classNames from "classnames";
 
 const QuizCard = ({ quiz }: { quiz: StoredQuizType }) => {
   const router = useRouter();
@@ -30,11 +31,13 @@ const QuizCard = ({ quiz }: { quiz: StoredQuizType }) => {
         </div>
         <div className="ml-4">
           <span
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-              quiz.published
-                ? "bg-green-100 text-green-800"
-                : "bg-yellow-100 text-yellow-800"
-            }`}
+            className={classNames(
+              "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium",
+              {
+                "bg-green-100 text-green-800": quiz.published,
+                "bg-yellow-100 text-yellow-800": !quiz.published,
+              }
+            )}
           >
             {quiz.published ? "Published" : "Draft"}
           </span>

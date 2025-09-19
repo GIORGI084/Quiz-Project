@@ -1,14 +1,14 @@
-import { ItemType } from "@/shared/model/quiz";
+import { ItemTypeEnum } from "@/shared/model/quiz";
 
 interface BaseAnswerChange {
-  type: ItemType.Radio | ItemType.Text;
+  type: ItemTypeEnum.Radio | ItemTypeEnum.Text;
   onAnswerChange: (questionId: string, value: string | string[]) => void;
   questionId: string;
   value: string;
 }
 
 interface CheckboxAnswerChange {
-  type: ItemType.Checkbox;
+  type: ItemTypeEnum.Checkbox;
   questionId: string;
   optionText: string;
   checked: boolean;
@@ -19,7 +19,7 @@ interface CheckboxAnswerChange {
 type HandleChangeOfAnswerType = BaseAnswerChange | CheckboxAnswerChange;
 
 const handleChangeOfAnswer = (params: HandleChangeOfAnswerType) => {
-  if (params.type === ItemType.Checkbox) {
+  if (params.type === ItemTypeEnum.Checkbox) {
     const { questionId, optionText, checked, answers, onAnswerChange } = params;
     const currentAnswers = (answers[questionId] as string[]) || [];
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd";
+import classNames from "classnames";
 
 interface DraggableBlockProps {
   block: {
@@ -22,11 +23,14 @@ const DraggableBlock: React.FC<DraggableBlockProps> = ({
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
-      className={`p-3 bg-gray-50 rounded-md border border-gray-200 cursor-grab transition-all duration-200 ${
-        snapshot.isDragging
-          ? "shadow-lg scale-105 rotate-2 bg-white border-blue-300"
-          : "hover:bg-gray-100 hover:shadow-md"
-      }`}
+      className={classNames(
+        "p-3 bg-gray-50 rounded-md border border-gray-200 cursor-grab transition-all duration-200",
+        {
+          "shadow-lg scale-105 rotate-2 bg-white border-blue-300":
+            snapshot.isDragging,
+          "hover:bg-gray-100 hover:shadow-md": !snapshot.isDragging,
+        }
+      )}
       style={{
         ...provided.draggableProps.style,
       }}
